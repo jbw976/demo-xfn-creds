@@ -1,0 +1,6 @@
+apiVersion: example.crossplane.io/v1alpha1
+kind: Compute
+metadata:
+  name: dev-instance
+spec:
+  instanceType: t3.micro

@@ -1,0 +1,26 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+ name: computes.example.crossplane.io
+spec:
+  group: example.crossplane.io
+  names:
+    kind: Compute
+    plural: computes
+  versions:
+  - name: v1alpha1
+    served: true
+    referenceable: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              instanceType:
+                type: string
+                description: The EC2 instance type to create
+            required:
+            - instanceType
+        

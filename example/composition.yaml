@@ -1,0 +1,39 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: demo-xfn-creds
+spec:
+  compositeTypeRef:
+    apiVersion: example.crossplane.io/v1alpha1
+    kind: Compute
+  mode: Pipeline
+  pipeline:
+  - step: create-resources
+    functionRef:
+      name: function-patch-and-transform
+    input:
+      apiVersion: pt.fn.crossplane.io/v1beta1
+      kind: Resources
+      resources:
+      - name: my-ec2-instance
+        base:
+          apiVersion: ec2.aws.upbound.io/v1beta1
+          kind: Instance
+          spec:
+            forProvider:
+              instanceType: "patched"
+              ami: ami-0cf2b4e024cdb6960 # Ubuntu Server 24.04 LTS (HVM), SSD Volume Type
+              region: us-west-2
+        patches:
+        - type: FromCompositeFieldPath
+          fromFieldPath: spec.instanceType
+          toFieldPath: spec.forProvider.instanceType
+  - step: check-instance-generation
+    functionRef:
+      name: demo-xfn-creds
+    credentials:
+    - name: aws-creds
+      source: Secret
+      secretRef:
+        namespace: crossplane-system
+        name: aws-creds
