@@ -3,4 +3,4 @@ kind: Compute
 metadata:
   name: dev-instance
 spec:
-  instanceType: t3.micro
+  instanceType: t1.micro
