@@ -52,7 +52,7 @@ kubectl apply -f composition.yaml
 
 Now we are ready to create a compute instance:
 ```
-kubectl apply -f xr.yaml
+kubectl apply -f claim.yaml
 ```
 
 Since we have provided an old non-current generation instance type, we expect the function to return an error and refuse to create the instance:
@@ -63,11 +63,11 @@ kubectl describe compute.example.crossplane.io/dev-instance
 
 Let's update the instance type to a value that is current generation (`t3.micro`) and try again:
 ```
-# edit xr.yaml to change instanceType to t3.micro, then:
-kubectl apply -f xr.yaml
+# edit claim.yaml to change instanceType to t3.micro, then:
+kubectl apply -f claim.yaml
 ```
 
-Now we should be using a current generation instance type, let's examine the XR again:
+Now we should be using a current generation instance type, let's examine the claim again:
 ```
 crossplane beta trace compute.example.crossplane.io/dev-instance -o wide
 ```
@@ -86,9 +86,9 @@ Now we have seen how to use credentials/secrets in your composition functions! â
 
 ## Clean-up
 
-Make sure to clean-up the EC2 instance by deleting the XR:
+Make sure to clean-up the EC2 instance by deleting the claim:
 ```
-kubectl delete -f xr.yaml
+kubectl delete -f claim.yaml
 kubectl get instance.ec2
 ```
 

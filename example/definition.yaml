@@ -1,10 +1,13 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: CompositeResourceDefinition
 metadata:
- name: computes.example.crossplane.io
+ name: xcomputes.example.crossplane.io
 spec:
   group: example.crossplane.io
   names:
+    kind: XCompute
+    plural: xcomputes
+  claimNames:
     kind: Compute
     plural: computes
   versions:

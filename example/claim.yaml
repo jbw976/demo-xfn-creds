@@ -1,5 +1,5 @@
 apiVersion: example.crossplane.io/v1alpha1
-kind: XCompute
+kind: Compute
 metadata:
   name: dev-instance
 spec:
