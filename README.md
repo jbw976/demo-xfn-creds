@@ -24,10 +24,14 @@ First, `cd` into the [example](./example/) directory:
 cd example
 ```
 
-Install all the required functions and providers, and make sure they are healthy:
+Install all the required functions and providers:
 ```
 kubectl apply -f functions.yaml
 kubectl apply -f providers.yaml
+```
+
+And make sure they become installed and healthy:
+```
 kubectl get pkg
 ```
 
