@@ -74,7 +74,7 @@ crossplane beta trace compute.example.crossplane.io/dev-instance -o wide
 
 Great, it's creating the EC2 instance now. Let's examine that managed resource too:
 ```
-kubectl get instance.ec2 -l crossplane.io/composite=dev-instance
+kubectl get instance.ec2 -l crossplane.io/claim-name=dev-instance
 ```
 
 Cool! Our function made authenticated requests to AWS, using the credentials we
